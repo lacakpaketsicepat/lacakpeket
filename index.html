@@ -3,154 +3,162 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lacak Paket SiCepat</title><style>
-* {
-    box-sizing: border-box;
+*{box-sizing:border-box}
+
+body{
+    margin:0;
+    padding:15px;
+    background:#080808;
+    color:#fff;
+    font-family:Arial,sans-serif;
 }
 
-body {
-    margin: 0;
-    padding: 20px 14px;
-    font-family: Arial, sans-serif;
-    background: #080808;
-    color: #fff;
+.container{
+    max-width:650px;
+    margin:auto;
 }
 
-.header {
-    text-align: center;
-    padding: 20px 10px;
+.header{
+    text-align:center;
+    padding:22px 10px;
 }
 
-.header h2 {
-    margin: 0 0 8px;
-    font-size: 23px;
+.header h2{
+    margin:0;
+    font-size:23px;
 }
 
-.header p {
-    color: #aaa;
-    font-size: 13px;
+.header p{
+    color:#999;
+    font-size:13px;
 }
 
-.container {
-    max-width: 650px;
-    margin: auto;
+.form-box,.package{
+    background:#151515;
+    border:1px solid #333;
+    border-radius:13px;
+    padding:18px;
+    margin-bottom:15px;
 }
 
-.form-box, .result-box {
-    background: #151515;
-    border: 1px solid #333;
-    border-radius: 17px;
-    padding: 20px;
-    margin-bottom: 18px;
+label{
+    display:block;
+    color:#ccc;
+    font-size:14px;
+    margin-bottom:9px;
 }
 
-label {
-    display: block;
-    margin-bottom: 10px;
-    color: #ccc;
-    font-size: 15px;
+select,textarea{
+    width:100%;
+    background:#080808;
+    border:1px solid #444;
+    border-radius:9px;
+    color:white;
+    padding:13px;
+    font-size:15px;
+    margin-bottom:18px;
 }
 
-select, textarea {
-    width: 100%;
-    background: #080808;
-    border: 1px solid #444;
-    border-radius: 12px;
-    color: white;
-    padding: 14px;
-    font-size: 16px;
-    margin-bottom: 20px;
+textarea{
+    height:125px;
+    resize:vertical;
 }
 
-textarea {
-    height: 130px;
-    resize: vertical;
+.info{
+    font-size:12px;
+    color:#999;
+    margin-top:-8px;
+    margin-bottom:16px;
 }
 
-button {
-    width: 100%;
-    padding: 16px;
-    border: none;
-    border-radius: 12px;
-    background: white;
-    color: black;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
+button{
+    width:100%;
+    padding:14px;
+    border:0;
+    border-radius:9px;
+    font-weight:bold;
+    cursor:pointer;
 }
 
-button:disabled {
-    opacity: 0.6;
+.track-btn{
+    background:white;
+    color:black;
+    font-size:15px;
 }
 
-.result-box {
-    display: none;
+.track-btn:disabled{
+    opacity:.5;
 }
 
-.package {
-    border: 1px solid #383838;
-    border-radius: 15px;
-    padding: 17px;
-    margin-bottom: 15px;
+.package h3{
+    font-size:15px;
+    margin:0 0 20px;
 }
 
-.package h3 {
-    font-size: 17px;
-    margin: 0 0 18px;
+.info-item{
+    margin-bottom:17px;
 }
 
-.info {
-    margin-bottom: 15px;
+.info-label{
+    font-size:13px;
+    color:#999;
+    margin-bottom:6px;
 }
 
-.info-label {
-    color: #999;
-    font-size: 14px;
-    margin-bottom: 5px;
+.info-value{
+    font-size:15px;
+    color:#fff;
+    line-height:1.5;
+    overflow-wrap:anywhere;
 }
 
-.info-value {
-    color: white;
-    font-size: 16px;
-    overflow-wrap: anywhere;
+.status{
+    color:#9be7a5;
+    font-weight:bold;
 }
 
-.history-btn {
-    margin-top: 8px;
-    background: #292929;
-    color: white;
-    font-size: 14px;
+.history-btn{
+    background:#292929;
+    color:white;
+    font-size:13px;
+    margin-top:5px;
 }
 
-.history {
-    display: none;
-    margin-top: 18px;
-    border-left: 3px solid #888;
-    padding-left: 13px;
+.history{
+    display:none;
+    margin-top:18px;
 }
 
-.history-item {
-    margin-bottom: 16px;
-    color: #ccc;
-    font-size: 14px;
-    line-height: 1.5;
+.history-item{
+    border-left:2px solid #888;
+    padding:2px 0 15px 13px;
+    margin-left:5px;
+    color:#ccc;
+    font-size:13px;
+    line-height:1.5;
 }
 
-.history-date {
-    color: white;
-    font-weight: bold;
-    margin-bottom: 5px;
+.history-date{
+    color:white;
+    font-weight:bold;
+    margin-bottom:5px;
 }
 
-.error {
-    color: #ff8585;
-    font-size: 14px;
+.loading{
+    color:#aaa;
+    font-size:13px;
 }
 
-.footer {
-    text-align: center;
-    color: #777;
-    font-size: 13px;
-    margin: 35px 0 15px;
+.error{
+    color:#ff8585;
+    font-size:13px;
+}
+
+.footer{
+    text-align:center;
+    color:#666;
+    font-size:12px;
+    padding:25px 0;
 }
 </style></head><body><div class="container"><div class="header">
     <h2>LACAK PAKET</h2>
@@ -167,82 +175,144 @@ button:disabled {
     <label>Masukkan Nomor Resi</label>
     <textarea id="resi" placeholder="Masukkan nomor resi, satu resi setiap baris"></textarea>
 
-    <p style="color:#999;font-size:13px;margin-top:-10px;margin-bottom:18px;">
-        Maksimal 55 nomor resi. Pisahkan setiap resi dengan baris baru.
-    </p>
+    <div class="info">
+        Maksimal 55 nomor resi sekaligus.
+    </div>
 
-    <button id="trackButton" onclick="trackPackages()">LACAK PAKET</button>
+    <button class="track-btn" id="trackBtn" onclick="trackPackages()">
+        LACAK PAKET
+    </button>
 
 </div>
 
-<div class="result-box" id="results"></div>
+<div id="results"></div>
 
 <div class="footer">
     Pelacakan Paket SiCepat Express
 </div>
 
 </div><script>
-const WORKER_URL = "https://anddo2336.workers.dev";
+const WORKER_URL = "https://lacakpeket.anddo2336.workers.dev";
 
-function getValue(value) {
-    if (value === null || value === undefined || value === "") {
-        return "-";
-    }
-    return value;
+function escapeHTML(value){
+    return String(value ?? "-").replace(/[&<>"']/g, char => ({
+        "&":"&amp;",
+        "<":"&lt;",
+        ">":"&gt;",
+        '"':"&quot;",
+        "'":"&#39;"
+    })[char]);
 }
 
-function createPackageCard(data, resi, index) {
+function getValue(objects, keys, fallback="-"){
+    for(const obj of objects){
+        if(!obj || typeof obj !== "object") continue;
+
+        for(const key of keys){
+            const value = obj[key];
+
+            if(value !== undefined && value !== null && value !== ""){
+                return value;
+            }
+        }
+    }
+
+    return fallback;
+}
+
+function toggleHistory(button){
+    const history = button.nextElementSibling;
+    const open = history.style.display === "block";
+
+    history.style.display = open ? "none" : "block";
+
+    button.textContent = open
+        ? "LIHAT RIWAYAT PERJALANAN"
+        : "SEMBUNYIKAN RIWAYAT";
+}
+
+function createCard(json, resi, index){
+
+    const data = json.data || {};
     const summary = data.summary || {};
     const detail = data.detail || {};
-    const history = Array.isArray(data.history) ? data.history : [];
 
-    const penerima = getValue(detail.receiver);
-    const alamat = getValue(detail.destination);
-    const nomorResi = getValue(summary.awb || resi);
-    const seller = getValue(detail.shipper);
-    const status = getValue(summary.status);
+    const penerima = getValue(
+        [detail, summary],
+        ["receiver","receiver_name","consignee"]
+    );
+
+    const alamat = getValue(
+        [detail, summary],
+        ["destination","receiver_address","destination_address"]
+    );
+
+    const nomorResi = getValue(
+        [summary, detail],
+        ["awb","waybill","resi"],
+        resi
+    );
+
+    const seller = getValue(
+        [detail, summary],
+        ["shipper","shipper_name","sender"]
+    );
+
+    const status = getValue(
+        [summary, detail],
+        ["status","status_desc"]
+    );
+
+    const history = Array.isArray(data.history)
+        ? data.history
+        : Array.isArray(data.manifest)
+        ? data.manifest
+        : [];
 
     let historyHTML = "";
 
-    if (history.length > 0) {
+    if(history.length){
         historyHTML = history.map(item => `
             <div class="history-item">
-                <div class="history-date">${escapeHTML(getValue(item.date))}</div>
-                <div>${escapeHTML(getValue(item.desc))}</div>
-                ${item.location ? `<div>${escapeHTML(item.location)}</div>` : ""}
+                <div class="history-date">
+                    ${escapeHTML(getValue([item],["date","datetime","time"]))}
+                </div>
+                ${escapeHTML(getValue([item],["desc","description","status"]))}
+                ${item.location ? "<br>"+escapeHTML(item.location) : ""}
             </div>
         `).join("");
-    } else {
-        historyHTML = '<div class="history-item">Riwayat perjalanan belum tersedia.</div>';
+    }else{
+        historyHTML = '<div class="loading">Riwayat perjalanan belum tersedia.</div>';
     }
 
     return `
         <div class="package">
+
             <h3>DETAIL PAKET #${index}</h3>
 
-            <div class="info">
+            <div class="info-item">
                 <div class="info-label">Nama Penerima</div>
                 <div class="info-value">${escapeHTML(penerima)}</div>
             </div>
 
-            <div class="info">
+            <div class="info-item">
                 <div class="info-label">Alamat penerima</div>
                 <div class="info-value">${escapeHTML(alamat)}</div>
             </div>
 
-            <div class="info">
+            <div class="info-item">
                 <div class="info-label">No resi</div>
                 <div class="info-value">${escapeHTML(nomorResi)}</div>
             </div>
 
-            <div class="info">
+            <div class="info-item">
                 <div class="info-label">Seller</div>
                 <div class="info-value">${escapeHTML(seller)}</div>
             </div>
 
-            <div class="info">
+            <div class="info-item">
                 <div class="info-label">Status</div>
-                <div class="info-value">${escapeHTML(status)}</div>
+                <div class="info-value status">${escapeHTML(status)}</div>
             </div>
 
             <button class="history-btn" onclick="toggleHistory(this)">
@@ -252,35 +322,13 @@ function createPackageCard(data, resi, index) {
             <div class="history">
                 ${historyHTML}
             </div>
+
         </div>
     `;
 }
 
-function escapeHTML(value) {
-    return String(value).replace(/[&<>"']/g, function(char) {
-        return {
-            "&": "&amp;",
-            "<": "&lt;",
-            ">": "&gt;",
-            '"': "&quot;",
-            "'": "&#039;"
-        }[char];
-    });
-}
+async function trackPackages(){
 
-function toggleHistory(button) {
-    const history = button.nextElementSibling;
-
-    if (history.style.display === "block") {
-        history.style.display = "none";
-        button.textContent = "LIHAT RIWAYAT PERJALANAN";
-    } else {
-        history.style.display = "block";
-        button.textContent = "SEMBUNYIKAN RIWAYAT";
-    }
-}
-
-async function trackPackages() {
     const input = document.getElementById("resi").value;
 
     const resiList = [...new Set(
@@ -290,67 +338,75 @@ async function trackPackages() {
     )];
 
     const results = document.getElementById("results");
-    const button = document.getElementById("trackButton");
+    const button = document.getElementById("trackBtn");
 
-    if (resiList.length === 0) {
+    if(!resiList.length){
         alert("Masukkan nomor resi terlebih dahulu.");
         return;
     }
 
-    if (resiList.length > 55) {
+    if(resiList.length > 55){
         alert("Maksimal 55 nomor resi.");
         return;
     }
 
-    results.style.display = "block";
-    results.innerHTML = "";
     button.disabled = true;
     button.textContent = "SEDANG MELACAK...";
+    results.innerHTML = "";
 
-    for (let i = 0; i < resiList.length; i++) {
-        const resi = resiList[i];
+    try{
 
-        const card = document.createElement("div");
-        card.className = "package";
-        card.innerHTML = `
-            <h3>DETAIL PAKET #${i + 1}</h3>
-            <div class="info-value">No resi: ${escapeHTML(resi)}</div>
-            <p style="color:#aaa">Sedang mengambil data...</p>
-        `;
+        for(let i=0; i<resiList.length; i++){
 
-        results.appendChild(card);
+            const resi = resiList[i];
 
-        try {
-            const response = await fetch(
-                `${WORKER_URL}/api/track?resi=${encodeURIComponent(resi)}`
-            );
+            const card = document.createElement("div");
+            card.className = "package";
 
-            if (!response.ok) {
-                throw new Error("Server memberikan respons " + response.status);
-            }
-
-            const json = await response.json();
-
-            if (!json.data || !json.data.summary) {
-                throw new Error(json.message || "Data pelacakan tidak ditemukan.");
-            }
-
-            card.outerHTML = createPackageCard(json.data, resi, i + 1);
-
-        } catch (error) {
             card.innerHTML = `
-                <h3>DETAIL PAKET #${i + 1}</h3>
-                <div class="info">
-                    <div class="info-label">No resi</div>
-                    <div class="info-value">${escapeHTML(resi)}</div>
-                </div>
-                <div class="error">Gagal: ${escapeHTML(error.message)}</div>
+                <h3>DETAIL PAKET #${i+1}</h3>
+                <div class="loading">Sedang mengambil data...</div>
             `;
-        }
-    }
 
-    button.disabled = false;
-    button.textContent = "LACAK PAKET";
+            results.appendChild(card);
+
+            try{
+
+                const url = WORKER_URL +
+                    "/api/track?resi=" + encodeURIComponent(resi);
+
+                const response = await fetch(url);
+                const json = await response.json();
+
+                if(!response.ok || json.success === false || !json.data){
+                    throw new Error(
+                        json.message || "Data pelacakan tidak ditemukan"
+                    );
+                }
+
+                card.outerHTML = createCard(json, resi, i+1);
+
+            }catch(error){
+
+                card.innerHTML = `
+                    <h3>DETAIL PAKET #${i+1}</h3>
+
+                    <div class="info-item">
+                        <div class="info-label">No resi</div>
+                        <div class="info-value">${escapeHTML(resi)}</div>
+                    </div>
+
+                    <div class="error">
+                        Gagal: ${escapeHTML(error.message)}
+                    </div>
+                `;
+            }
+        }
+
+    }finally{
+        button.disabled = false;
+        button.textContent = "LACAK PAKET";
+    }
 }
 </script></body>
 </html>
