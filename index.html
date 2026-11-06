@@ -6,247 +6,314 @@
 *{box-sizing:border-box}
 body{
  margin:0;
- font-family:Arial,sans-serif;
  background:#080808;
- color:#fff;
+ color:#f5f5f5;
+ font-family:Arial,sans-serif;
 }
 .header{
  background:#111;
  border-bottom:1px solid #292929;
- padding:23px 15px;
  text-align:center;
+ padding:25px 15px;
 }
-.header h2{margin:0;font-size:21px}
-.header p{color:#aaa;font-size:12px;margin:7px 0 0}
-.container{max-width:650px;margin:22px auto;padding:0 13px}
-.box{
- background:#151515;
+.header h2{font-size:21px;margin:0}
+.header p{font-size:12px;color:#999;margin:7px 0 0}
+.container{max-width:650px;margin:22px auto;padding:0 14px}
+.form-box{
+ background:#141414;
  border:1px solid #292929;
  border-radius:12px;
  padding:17px;
- margin-bottom:16px;
+ margin-bottom:20px;
 }
-label{display:block;font-size:13px;margin-bottom:9px;color:#ddd}
+label{
+ display:block;
+ font-size:13px;
+ color:#ccc;
+ margin-bottom:9px;
+}
 select,textarea{
  width:100%;
  background:#090909;
- border:1px solid #393939;
- border-radius:8px;
  color:white;
+ border:1px solid #383838;
+ border-radius:8px;
  padding:13px;
  font-size:14px;
  outline:none;
 }
 select{height:45px;margin-bottom:17px}
-textarea{height:135px;resize:vertical}
+textarea{height:125px;resize:vertical}
+.info{font-size:11px;color:#888;margin-top:9px}
 button{
- width:100%;
- padding:13px;
  border:0;
  border-radius:8px;
- background:#fff;
- color:#000;
- font-weight:bold;
- font-size:14px;
- margin-top:14px;
  cursor:pointer;
 }
-button:disabled{opacity:.5}
-.info{font-size:11px;color:#999;margin-top:9px}
-.card{
- background:#151515;
- border:1px solid #303030;
- border-radius:11px;
- padding:15px;
- margin-bottom:12px;
+.track-btn{
+ width:100%;
+ background:#fff;
+ color:#000;
+ padding:14px;
+ font-size:14px;
+ font-weight:bold;
+ margin-top:15px;
 }
-.card h3{font-size:14px;margin:0 0 14px}
+.track-btn:disabled{opacity:.5}
+#results{display:flex;flex-direction:column;gap:13px}
+.card{
+ background:#141414;
+ border:1px solid #303030;
+ border-radius:12px;
+ padding:16px;
+}
+.card h3{
+ font-size:14px;
+ margin:0 0 14px;
+}
 .row{
  display:flex;
  justify-content:space-between;
+ align-items:flex-start;
  gap:12px;
- padding:9px 0;
+ padding:10px 0;
  border-bottom:1px solid #292929;
  font-size:12px;
+ line-height:1.5;
 }
-.row span:first-child{color:#999;min-width:100px}
-.row span:last-child{text-align:right;overflow-wrap:anywhere}
-.status{color:#9be7a5}
-.history{
- margin-top:13px;
- background:#222;
- color:white;
- padding:10px;
- border-radius:7px;
+.row:last-of-type{border-bottom:0}
+.row .label{color:#999;flex:0 0 105px}
+.row .value{
+ color:#eee;
+ text-align:right;
+ overflow-wrap:anywhere;
+}
+.status{color:#9be7a5!important;font-weight:bold}
+.history-btn{
+ width:100%;
+ background:#242424;
+ color:#fff;
+ padding:12px;
  font-size:12px;
+ font-weight:bold;
+ margin-top:14px;
 }
 .history-list{
  display:none;
- padding:12px 5px 0;
- font-size:12px;
- color:#ccc;
+ padding:15px 5px 0;
 }
 .history-item{
- border-left:2px solid #888;
- padding:0 0 14px 12px;
+ border-left:2px solid #777;
+ padding:0 0 17px 13px;
  margin-left:5px;
+ font-size:12px;
+ color:#ccc;
+ line-height:1.5;
 }
-.history-item b{color:white;display:block;margin-bottom:5px}
-.loading,.error{font-size:12px;color:#bbb;padding:8px 0}
-.footer{text-align:center;color:#666;font-size:11px;padding:20px}
-</style></head><body><div class="header">
+.history-item:last-child{padding-bottom:0}
+.history-item b{
+ display:block;
+ color:white;
+ margin-bottom:5px;
+}
+.message{font-size:12px;color:#aaa;padding:10px 0}
+.error{color:#ff8888}
+.footer{
+ text-align:center;
+ color:#666;
+ font-size:11px;
+ padding:25px 10px;
+}
+</style></head><body><header class="header">
  <h2>LACAK PAKET</h2>
  <p>Tracking Pengiriman SiCepat Express</p>
-</div><div class="container">
- <div class="box">
+</header><main class="container"> <section class="form-box">
   <label>Ekspedisi</label>
   <select id="courier">
    <option value="sicepat">SiCepat Express</option>
   </select><label>Masukkan Nomor Resi</label>
 
-  <textarea id="resi" placeholder="Masukkan nomor resi, satu resi setiap baris..."></textarea>  <div class="info">Maksimal 55 nomor resi. Pisahkan setiap resi dengan baris baru.</div>
-  <button id="trackBtn" onclick="lacak()">LACAK PAKET</button>
- </div> <div id="results"></div>
-</div><div class="footer">Pelacakan Paket SiCepat Express</div><script>
+  <textarea id="resi" placeholder="Masukkan nomor resi&#10;Satu nomor resi setiap baris"></textarea>  <div class="info">Maksimal 55 nomor resi sekaligus.</div>  <button class="track-btn" id="trackBtn" onclick="lacak()">
+   LACAK PAKET
+  </button>
+ </section> <div id="results"></div></main><footer class="footer">
+ Pelacakan Paket SiCepat Express
+</footer><script>
 const WORKER_URL = "https://lacakpeket.anddo2336.workers.dev";
 
-function ambil(obj, keys, fallback="-"){
- for(const key of keys){
-  if(obj && obj[key] !== undefined && obj[key] !== null && obj[key] !== ""){
-   return obj[key];
+function escapeHTML(value){
+ return String(value ?? "").replace(/[&<>"']/g,c=>({
+  "&":"&amp;",
+  "<":"&lt;",
+  ">":"&gt;",
+  '"':"&quot;",
+  "'":"&#39;"
+ })[c]);
+}
+
+function getValue(objects,keys,fallback="Tidak tersedia"){
+ for(const obj of objects){
+  if(!obj || typeof obj!=="object") continue;
+  for(const key of keys){
+   const value=obj[key];
+   if(value!==undefined && value!==null && value!==""){
+    return value;
+   }
   }
  }
  return fallback;
 }
 
-function aman(value){
- return String(value ?? "-").replace(/[&<>"']/g, c => ({
- "&":"&amp;",
- "<":"&lt;",
- ">":"&gt;",
- '"':"&quot;",
- "'":"&#39;"
- })[c]);
-}
-
-function buatBaris(label,value){
- return `<div class="row"><span>${label}</span><span>${value}</span></div>`;
-}
-
-function tampilkan(data,resi,index){
- const root = data.data || data;
- const summary = root.summary || {};
- const detail = root.detail || {};
- const history = root.history || root.manifest || [];
-
- const penerima = ambil(summary,["receiver","receiver_name","consignee"],
-                 ambil(detail,["receiver","receiver_name","consignee"]));
-
- const alamat = ambil(summary,["destination_address","receiver_address","address"],
-               ambil(detail,["destination_address","receiver_address","address"]));
-
- const nomor = ambil(summary,["awb","waybill","resi"],resi);
-
- const seller = ambil(summary,["shipper","shipper_name","sender"],
-               ambil(detail,["shipper","shipper_name","sender"]));
-
- const status = ambil(summary,["status","status_desc","desc"],
-                ambil(detail,["status","status_desc"]));
-
- let riwayat = "";
-
- if(Array.isArray(history) && history.length){
-  riwayat = history.map(item => `
-   <div class="history-item">
-    <b>${aman(ambil(item,["date","datetime","time"]))}</b>
-    ${aman(ambil(item,["desc","description","status"]))}
-    <br>${aman(ambil(item,["location","city"]))}
-   </div>
-  `).join("");
- }else{
-  riwayat = '<div class="loading">Riwayat perjalanan belum tersedia.</div>';
- }
-
+function row(label,value,extra=""){
  return `
- <div class="card">
-  <h3>DETAIL PAKET #${index}</h3>
-  ${buatBaris("Nama Penerima",aman(penerima))}
-  ${buatBaris("Alamat",aman(alamat))}
-  ${buatBaris("No Resi",aman(nomor))}
-  ${buatBaris("Seller",aman(seller))}
-  ${buatBaris("Status",`<span class="status">${aman(status)}</span>`)}
-  <button class="history" onclick="toggleHistory(this)">LIHAT RIWAYAT PERJALANAN</button>
-  <div class="history-list">${riwayat}</div>
+ <div class="row">
+  <span class="label">${label}</span>
+  <span class="value ${extra}">${escapeHTML(value)}</span>
  </div>`;
 }
 
-function toggleHistory(button){
- const list = button.nextElementSibling;
- list.style.display = list.style.display === "block" ? "none" : "block";
+function formatHistory(history){
+ if(!Array.isArray(history) || !history.length){
+  return '<div class="message">Riwayat perjalanan belum tersedia.</div>';
+ }
+
+ return history.map(item=>{
+  const date=getValue([item],["date","datetime","time"],"");
+  const description=getValue([item],["desc","description","status"],"Informasi perjalanan");
+  const location=getValue([item],["location","city"],"");
+
+  return `
+   <div class="history-item">
+    <b>${escapeHTML(date)}</b>
+    ${escapeHTML(description)}
+    ${location!=="Tidak tersedia" && location ? "<br>"+escapeHTML(location):""}
+   </div>`;
+ }).join("");
 }
 
-async function lacakSatu(resi,index){
- const target = document.getElementById("result-"+index);
+function renderCard(json,resi,index){
+ const root=json.data || json;
+ const summary=root.summary || {};
+ const detail=root.detail || {};
+
+ const objects=[summary,detail,root];
+
+ const receiver=getValue(objects,[
+  "receiver","receiver_name","consignee","receiver_name"
+ ]);
+
+ const address=getValue(objects,[
+  "destination_address","receiver_address","address",
+  "destination","receiver_detail"
+ ]);
+
+ const awb=getValue(objects,["awb","waybill","resi"],resi);
+
+ const seller=getValue(objects,[
+  "shipper","shipper_name","sender"
+ ]);
+
+ const status=getValue(objects,[
+  "status","status_desc","desc"
+ ]);
+
+ const history=getValue(objects,[
+  "history","manifest"
+ ],[]);
+
+ return `
+ <article class="card">
+  <h3>DETAIL PAKET #${index}</h3>
+
+  ${row("Nama Penerima",receiver)}
+  ${row("Alamat",address)}
+  ${row("No Resi",awb)}
+  ${row("Seller",seller)}
+  ${row("Status",status,"status")}
+
+  <button class="history-btn" onclick="toggleHistory(this)">
+   LIHAT RIWAYAT PERJALANAN
+  </button>
+
+  <div class="history-list">
+   ${formatHistory(history)}
+  </div>
+ </article>`;
+}
+
+function toggleHistory(button){
+ const list=button.nextElementSibling;
+ const open=list.style.display==="block";
+
+ list.style.display=open?"none":"block";
+ button.textContent=open
+  ?"LIHAT RIWAYAT PERJALANAN"
+  :"TUTUP RIWAYAT PERJALANAN";
+}
+
+async function trackOne(resi,index){
+ const target=document.getElementById("result-"+index);
 
  try{
-  const url = WORKER_URL.replace(/\/$/,"") +
-   "/api/track?resi="+encodeURIComponent(resi);
+  const url=WORKER_URL+"/api/track?resi="+encodeURIComponent(resi);
+  const response=await fetch(url);
+  const json=await response.json();
 
-  const response = await fetch(url);
-  const json = await response.json();
-
-  if(!response.ok || json.success === false){
-   throw new Error(json.message || "Gagal melacak paket");
+  if(!response.ok || json.success===false){
+   throw new Error(json.message || "Gagal mengambil data paket");
   }
 
-  target.innerHTML = tampilkan(json,resi,index);
+  target.innerHTML=renderCard(json,resi,index);
 
  }catch(error){
-  target.innerHTML = `
-   <div class="card">
+  target.innerHTML=`
+   <article class="card">
     <h3>DETAIL PAKET #${index}</h3>
-    ${buatBaris("No Resi",aman(resi))}
-    <div class="error">Gagal: ${aman(error.message)}</div>
-   </div>`;
+    ${row("No Resi",resi)}
+    <div class="message error">${escapeHTML(error.message)}</div>
+   </article>`;
  }
 }
 
 async function lacak(){
- const input = document.getElementById("resi").value;
+ const input=document.getElementById("resi").value;
 
- const resis = [...new Set(input.split(/[\n,;]+/)
-  .map(x=>x.trim()).filter(Boolean))];
+ const resis=[...new Set(
+  input.split(/[\n,;]+/)
+  .map(x=>x.trim())
+  .filter(Boolean)
+ )];
 
- const results = document.getElementById("results");
- const button = document.getElementById("trackBtn");
+ const results=document.getElementById("results");
+ const button=document.getElementById("trackBtn");
 
  if(!resis.length){
   alert("Masukkan nomor resi terlebih dahulu.");
   return;
  }
 
- if(resis.length > 55){
+ if(resis.length>55){
   alert("Maksimal 55 nomor resi.");
   return;
  }
 
- button.disabled = true;
- button.textContent = "SEDANG MELACAK...";
+ button.disabled=true;
+ button.textContent="SEDANG MELACAK...";
 
- results.innerHTML = resis.map((resi,i)=>
-  `<div id="result-${i+1}" class="card">
+ results.innerHTML=resis.map((resi,i)=>`
+  <div id="result-${i+1}" class="card">
    <h3>DETAIL PAKET #${i+1}</h3>
-   <div class="loading">Sedang melacak ${aman(resi)}...</div>
-  </div>`
- ).join("");
+   <div class="message">Sedang melacak ${escapeHTML(resi)}...</div>
+  </div>
+ `).join("");
 
  try{
   for(let i=0;i<resis.length;i++){
-   await lacakSatu(resis[i],i+1);
+   await trackOne(resis[i],i+1);
   }
  }finally{
-  button.disabled = false;
-  button.textContent = "LACAK PAKET";
+  button.disabled=false;
+  button.textContent="LACAK PAKET";
  }
 }
 </script></body>
