@@ -2,8 +2,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lacak Paket SiCepat</title>
-<style>
+<title>Lacak Paket SiCepat</title><style>
 *{box-sizing:border-box}
 body{
  margin:0;
@@ -50,6 +49,7 @@ button{
  font-weight:bold;
  font-size:14px;
  margin-top:14px;
+ cursor:pointer;
 }
 button:disabled{opacity:.5}
 .info{font-size:11px;color:#999;margin-top:9px}
@@ -94,9 +94,7 @@ button:disabled{opacity:.5}
 .history-item b{color:white;display:block;margin-bottom:5px}
 .loading,.error{font-size:12px;color:#bbb;padding:8px 0}
 .footer{text-align:center;color:#666;font-size:11px;padding:20px}
-</style>
-</head>
-<body><div class="header">
+</style></head><body><div class="header">
  <h2>LACAK PAKET</h2>
  <p>Tracking Pengiriman SiCepat Express</p>
 </div><div class="container">
@@ -110,7 +108,7 @@ button:disabled{opacity:.5}
   <button id="trackBtn" onclick="lacak()">LACAK PAKET</button>
  </div> <div id="results"></div>
 </div><div class="footer">Pelacakan Paket SiCepat Express</div><script>
-const WORKER_URL = "GANTI_DENGAN_URL_WORKER_KAMU";
+const WORKER_URL = "https://lacakpeket.anddo2336.workers.dev";
 
 function ambil(obj, keys, fallback="-"){
  for(const key of keys){
@@ -121,14 +119,18 @@ function ambil(obj, keys, fallback="-"){
  return fallback;
 }
 
-function buatBaris(label,value){
- return `<div class="row"><span>${label}</span><span>${value}</span></div>`;
-}
-
 function aman(value){
  return String(value ?? "-").replace(/[&<>"']/g, c => ({
- "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+ "&":"&amp;",
+ "<":"&lt;",
+ ">":"&gt;",
+ '"':"&quot;",
+ "'":"&#39;"
  })[c]);
+}
+
+function buatBaris(label,value){
+ return `<div class="row"><span>${label}</span><span>${value}</span></div>`;
 }
 
 function tampilkan(data,resi,index){
@@ -139,15 +141,20 @@ function tampilkan(data,resi,index){
 
  const penerima = ambil(summary,["receiver","receiver_name","consignee"],
                  ambil(detail,["receiver","receiver_name","consignee"]));
+
  const alamat = ambil(summary,["destination_address","receiver_address","address"],
                ambil(detail,["destination_address","receiver_address","address"]));
+
  const nomor = ambil(summary,["awb","waybill","resi"],resi);
+
  const seller = ambil(summary,["shipper","shipper_name","sender"],
                ambil(detail,["shipper","shipper_name","sender"]));
+
  const status = ambil(summary,["status","status_desc","desc"],
                 ambil(detail,["status","status_desc"]));
 
  let riwayat = "";
+
  if(Array.isArray(history) && history.length){
   riwayat = history.map(item => `
    <div class="history-item">
@@ -180,6 +187,7 @@ function toggleHistory(button){
 
 async function lacakSatu(resi,index){
  const target = document.getElementById("result-"+index);
+
  try{
   const url = WORKER_URL.replace(/\/$/,"") +
    "/api/track?resi="+encodeURIComponent(resi);
@@ -192,6 +200,7 @@ async function lacakSatu(resi,index){
   }
 
   target.innerHTML = tampilkan(json,resi,index);
+
  }catch(error){
   target.innerHTML = `
    <div class="card">
@@ -204,6 +213,7 @@ async function lacakSatu(resi,index){
 
 async function lacak(){
  const input = document.getElementById("resi").value;
+
  const resis = [...new Set(input.split(/[\n,;]+/)
   .map(x=>x.trim()).filter(Boolean))];
 
@@ -214,17 +224,15 @@ async function lacak(){
   alert("Masukkan nomor resi terlebih dahulu.");
   return;
  }
+
  if(resis.length > 55){
   alert("Maksimal 55 nomor resi.");
-  return;
- }
- if(WORKER_URL.includes("GANTI_DENGAN")){
-  alert("URL Worker belum dipasang.");
   return;
  }
 
  button.disabled = true;
  button.textContent = "SEDANG MELACAK...";
+
  results.innerHTML = resis.map((resi,i)=>
   `<div id="result-${i+1}" class="card">
    <h3>DETAIL PAKET #${i+1}</h3>
@@ -232,12 +240,14 @@ async function lacak(){
   </div>`
  ).join("");
 
- for(let i=0;i<resis.length;i++){
-  await lacakSatu(resis[i],i+1);
+ try{
+  for(let i=0;i<resis.length;i++){
+   await lacakSatu(resis[i],i+1);
+  }
+ }finally{
+  button.disabled = false;
+  button.textContent = "LACAK PAKET";
  }
-
- button.disabled = false;
- button.textContent = "LACAK PAKET";
 }
 </script></body>
 </html>
