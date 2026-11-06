@@ -1,628 +1,243 @@
-<!DOCTYPE html>
-<html lang="id">
+<!DOCTYPE html><html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Lacak Paket SiCepat</title>
-
 <style>
-* {
-    box-sizing: border-box;
+*{box-sizing:border-box}
+body{
+ margin:0;
+ font-family:Arial,sans-serif;
+ background:#080808;
+ color:#fff;
 }
-
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f0f3f9;
-    color: #202938;
+.header{
+ background:#111;
+ border-bottom:1px solid #292929;
+ padding:23px 15px;
+ text-align:center;
 }
-
-.header {
-    background: linear-gradient(120deg,#192536,#26364e);
-    color: white;
-    text-align: center;
-    padding: 32px 15px 85px;
+.header h2{margin:0;font-size:21px}
+.header p{color:#aaa;font-size:12px;margin:7px 0 0}
+.container{max-width:650px;margin:22px auto;padding:0 13px}
+.box{
+ background:#151515;
+ border:1px solid #292929;
+ border-radius:12px;
+ padding:17px;
+ margin-bottom:16px;
 }
-
-.header h1 {
-    font-size: 24px;
-    margin: 0 0 9px;
+label{display:block;font-size:13px;margin-bottom:9px;color:#ddd}
+select,textarea{
+ width:100%;
+ background:#090909;
+ border:1px solid #393939;
+ border-radius:8px;
+ color:white;
+ padding:13px;
+ font-size:14px;
+ outline:none;
 }
-
-.header p {
-    margin: 0;
-    font-size: 13px;
-    color: #d6dce6;
+select{height:45px;margin-bottom:17px}
+textarea{height:135px;resize:vertical}
+button{
+ width:100%;
+ padding:13px;
+ border:0;
+ border-radius:8px;
+ background:#fff;
+ color:#000;
+ font-weight:bold;
+ font-size:14px;
+ margin-top:14px;
 }
-
-.container {
-    max-width: 650px;
-    margin: -55px auto 0;
-    padding: 0 13px;
+button:disabled{opacity:.5}
+.info{font-size:11px;color:#999;margin-top:9px}
+.card{
+ background:#151515;
+ border:1px solid #303030;
+ border-radius:11px;
+ padding:15px;
+ margin-bottom:12px;
 }
-
-.form-box {
-    background: white;
-    border-radius: 19px;
-    padding: 19px;
-    box-shadow: 0 5px 20px rgba(0,0,0,.05);
-    margin-bottom: 20px;
+.card h3{font-size:14px;margin:0 0 14px}
+.row{
+ display:flex;
+ justify-content:space-between;
+ gap:12px;
+ padding:9px 0;
+ border-bottom:1px solid #292929;
+ font-size:12px;
 }
-
-label {
-    display: block;
-    font-size: 14px;
-    font-weight: bold;
-    margin-bottom: 9px;
-    color: #374151;
+.row span:first-child{color:#999;min-width:100px}
+.row span:last-child{text-align:right;overflow-wrap:anywhere}
+.status{color:#9be7a5}
+.history{
+ margin-top:13px;
+ background:#222;
+ color:white;
+ padding:10px;
+ border-radius:7px;
+ font-size:12px;
 }
-
-select,
-textarea {
-    width: 100%;
-    border: 1px solid #d9dde3;
-    border-radius: 12px;
-    background: white;
-    color: #202938;
-    font-size: 14px;
-    padding: 12px 14px;
-    outline: none;
-    font-family: Arial,sans-serif;
+.history-list{
+ display:none;
+ padding:12px 5px 0;
+ font-size:12px;
+ color:#ccc;
 }
-
-select {
-    height: 52px;
-    margin-bottom: 19px;
+.history-item{
+ border-left:2px solid #888;
+ padding:0 0 14px 12px;
+ margin-left:5px;
 }
-
-textarea {
-    height: 135px;
-    resize: vertical;
-    line-height: 1.6;
-}
-
-select:focus,
-textarea:focus {
-    border-color: #26364e;
-}
-
-.info {
-    font-size: 12px;
-    color: #89909a;
-    margin-top: 10px;
-}
-
-.track-btn {
-    width: 100%;
-    border: none;
-    border-radius: 11px;
-    padding: 15px;
-    background: #202938;
-    color: white;
-    font-size: 15px;
-    font-weight: bold;
-    margin-top: 17px;
-    cursor: pointer;
-}
-
-.track-btn:disabled {
-    opacity: .6;
-}
-
-.progress {
-    display: none;
-    background: white;
-    border-radius: 12px;
-    padding: 14px;
-    margin-bottom: 15px;
-    color: #555;
-    font-size: 12px;
-}
-
-.progress.show {
-    display: block;
-}
-
-.card {
-    background: white;
-    border-radius: 19px;
-    padding: 19px;
-    margin-bottom: 17px;
-    box-shadow: 0 5px 20px rgba(0,0,0,.04);
-}
-
-.card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-bottom: 15px;
-    border-bottom: 1px solid #e7e9ed;
-    margin-bottom: 18px;
-}
-
-.card-header h2 {
-    font-size: 18px;
-    margin: 0;
-}
-
-.card-number {
-    color: #9299a5;
-    font-size: 15px;
-}
-
-.field {
-    margin-bottom: 17px;
-}
-
-.field-label {
-    color: #858d99;
-    font-size: 14px;
-    margin-bottom: 6px;
-}
-
-.field-value {
-    font-size: 16px;
-    font-weight: bold;
-    line-height: 1.4;
-    overflow-wrap: anywhere;
-}
-
-.status {
-    display: inline-block;
-    padding: 8px 14px;
-    border-radius: 30px;
-    background: #e5f7ed;
-    color: #168052;
-    font-size: 13px;
-    font-weight: bold;
-}
-
-.status.pending {
-    background: #fff3d8;
-    color: #a87512;
-}
-
-.status.failed {
-    background: #fde8e8;
-    color: #c03939;
-}
-
-.history-btn {
-    width: 100%;
-    padding: 15px 10px;
-    background: #f8f9fb;
-    border: 1px solid #e0e4eb;
-    border-radius: 12px;
-    color: #303b4e;
-    font-size: 14px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.history {
-    display: none;
-    margin-top: 18px;
-    border-top: 1px solid #e7e9ed;
-    padding-top: 17px;
-}
-
-.history.show {
-    display: block;
-}
-
-.history-title {
-    font-size: 14px;
-    font-weight: bold;
-    margin-bottom: 18px;
-}
-
-.history-item {
-    border-left: 2px solid #26364e;
-    padding: 0 0 18px 14px;
-    margin-left: 5px;
-    position: relative;
-}
-
-.history-item:before {
-    content: "";
-    position: absolute;
-    left: -6px;
-    top: 2px;
-    width: 9px;
-    height: 9px;
-    background: #26364e;
-    border-radius: 50%;
-}
-
-.history-desc {
-    font-size: 13px;
-    font-weight: bold;
-    line-height: 1.5;
-}
-
-.history-date,
-.history-location {
-    color: #858d99;
-    font-size: 11px;
-    margin-top: 5px;
-}
-
-.error {
-    color: #c03939;
-    font-size: 13px;
-}
-
-.footer {
-    text-align: center;
-    padding: 23px 10px;
-    color: #9299a5;
-    font-size: 11px;
-}
-
-@media(max-width:480px) {
-    .container {
-        padding: 0 12px;
-    }
-
-    .form-box,
-    .card {
-        padding: 17px;
-    }
-
-    .field-value {
-        font-size: 16px;
-    }
-}
+.history-item b{color:white;display:block;margin-bottom:5px}
+.loading,.error{font-size:12px;color:#bbb;padding:8px 0}
+.footer{text-align:center;color:#666;font-size:11px;padding:20px}
 </style>
 </head>
+<body><div class="header">
+ <h2>LACAK PAKET</h2>
+ <p>Tracking Pengiriman SiCepat Express</p>
+</div><div class="container">
+ <div class="box">
+  <label>Ekspedisi</label>
+  <select id="courier">
+   <option value="sicepat">SiCepat Express</option>
+  </select><label>Masukkan Nomor Resi</label>
 
-<body>
+  <textarea id="resi" placeholder="Masukkan nomor resi, satu resi setiap baris..."></textarea>  <div class="info">Maksimal 55 nomor resi. Pisahkan setiap resi dengan baris baru.</div>
+  <button id="trackBtn" onclick="lacak()">LACAK PAKET</button>
+ </div> <div id="results"></div>
+</div><div class="footer">Pelacakan Paket SiCepat Express</div><script>
+const WORKER_URL = "GANTI_DENGAN_URL_WORKER_KAMU";
 
-<header class="header">
-    <h1>Lacak Paket</h1>
-    <p>Pantau perjalanan paket Anda dengan mudah</p>
-</header>
-
-<main class="container">
-
-    <section class="form-box">
-
-        <label>Ekspedisi</label>
-
-        <select id="courier">
-            <option value="sicepat">SiCepat</option>
-        </select>
-
-        <label>Nomor Resi</label>
-
-        <textarea
-            id="resi"
-            placeholder="Masukkan nomor resi di sini..."
-            oninput="updateCount()"
-        ></textarea>
-
-        <div class="info" id="count">
-            Maksimal 55 nomor resi
-        </div>
-
-        <button class="track-btn"
-            id="trackButton"
-            onclick="lacakSemua()">
-            Lacak Paket
-        </button>
-
-    </section>
-
-    <div class="progress" id="progress"></div>
-
-    <div id="hasil"></div>
-
-    <footer class="footer">
-        Lacak Paket SiCepat Express
-    </footer>
-
-</main>
-
-<script>
-
-// ALAMAT CLOUDFLARE WORKER
-const WORKER_URL =
-"https://GANTI-DENGAN-WORKER-KAMU.workers.dev";
-
-
-function ambilResi() {
-    return [...new Set(
-        document.getElementById("resi").value
-        .split(/[\n,;]+/)
-        .map(x => x.trim())
-        .filter(Boolean)
-    )];
+function ambil(obj, keys, fallback="-"){
+ for(const key of keys){
+  if(obj && obj[key] !== undefined && obj[key] !== null && obj[key] !== ""){
+   return obj[key];
+  }
+ }
+ return fallback;
 }
 
-
-function updateCount() {
-    document.getElementById("count").innerText =
-        "Jumlah resi: " + ambilResi().length + " / 55";
+function buatBaris(label,value){
+ return `<div class="row"><span>${label}</span><span>${value}</span></div>`;
 }
 
-
-function escapeHTML(value) {
-    return String(value ?? "").replace(/[&<>"']/g, c => ({
-        "&": "&amp;",
-        "<": "&lt;",
-        ">": "&gt;",
-        '"': "&quot;",
-        "'": "&#39;"
-    })[c]);
+function aman(value){
+ return String(value ?? "-").replace(/[&<>"']/g, c => ({
+ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+ })[c]);
 }
 
+function tampilkan(data,resi,index){
+ const root = data.data || data;
+ const summary = root.summary || {};
+ const detail = root.detail || {};
+ const history = root.history || root.manifest || [];
 
-async function lacakSemua() {
+ const penerima = ambil(summary,["receiver","receiver_name","consignee"],
+                 ambil(detail,["receiver","receiver_name","consignee"]));
+ const alamat = ambil(summary,["destination_address","receiver_address","address"],
+               ambil(detail,["destination_address","receiver_address","address"]));
+ const nomor = ambil(summary,["awb","waybill","resi"],resi);
+ const seller = ambil(summary,["shipper","shipper_name","sender"],
+               ambil(detail,["shipper","shipper_name","sender"]));
+ const status = ambil(summary,["status","status_desc","desc"],
+                ambil(detail,["status","status_desc"]));
 
-    const daftar = ambilResi();
-    const hasil = document.getElementById("hasil");
-    const tombol = document.getElementById("trackButton");
-    const progress = document.getElementById("progress");
+ let riwayat = "";
+ if(Array.isArray(history) && history.length){
+  riwayat = history.map(item => `
+   <div class="history-item">
+    <b>${aman(ambil(item,["date","datetime","time"]))}</b>
+    ${aman(ambil(item,["desc","description","status"]))}
+    <br>${aman(ambil(item,["location","city"]))}
+   </div>
+  `).join("");
+ }else{
+  riwayat = '<div class="loading">Riwayat perjalanan belum tersedia.</div>';
+ }
 
-    if (!daftar.length) {
-        alert("Masukkan nomor resi terlebih dahulu.");
-        return;
-    }
-
-    if (daftar.length > 55) {
-        alert("Maksimal 55 nomor resi.");
-        return;
-    }
-
-    if (WORKER_URL.includes("GANTI-DENGAN")) {
-        alert("Alamat Cloudflare Worker belum dipasang.");
-        return;
-    }
-
-    hasil.innerHTML = "";
-    tombol.disabled = true;
-    tombol.innerText = "Sedang Melacak...";
-    progress.classList.add("show");
-
-    try {
-
-        for (let i = 0; i < daftar.length; i++) {
-
-            const nomor = daftar[i];
-
-            progress.innerText =
-                "Memproses paket " + (i + 1) +
-                " dari " + daftar.length;
-
-            const card = document.createElement("div");
-            card.className = "card";
-
-            card.innerHTML = `
-                <div class="card-header">
-                    <h2>Detail Paket</h2>
-                    <span class="card-number">#${i + 1}</span>
-                </div>
-                Mengambil data paket...
-            `;
-
-            hasil.appendChild(card);
-
-            try {
-
-                const response = await fetch(
-                    WORKER_URL +
-                    "/api/track?resi=" +
-                    encodeURIComponent(nomor)
-                );
-
-                const result = await response.json();
-
-                if (!response.ok || result.success === false) {
-                    throw new Error(
-                        result.message || "Gagal melacak paket."
-                    );
-                }
-
-                const data = result.data || result.result || result;
-                const summary = data.summary || {};
-                const detail = data.detail || {};
-
-                const penerima =
-                    detail.receiver?.name ||
-                    detail.receiver ||
-                    data.receiver?.name ||
-                    data.receiver ||
-                    "-";
-
-                const alamat =
-                    detail.destination ||
-                    detail.address ||
-                    data.destination ||
-                    "-";
-
-                const seller =
-                    detail.shipper?.name ||
-                    detail.shipper ||
-                    data.shipper?.name ||
-                    data.shipper ||
-                    "-";
-
-                const status =
-                    summary.status ||
-                    data.status ||
-                    "Tidak tersedia";
-
-                const history =
-                    data.history ||
-                    data.manifest ||
-                    [];
-
-                const st = String(status).toUpperCase();
-
-                let statusClass = "pending";
-
-                if (
-                    st.includes("DELIVERED") ||
-                    st.includes("DITERIMA") ||
-                    st.includes("TERKIRIM")
-                ) {
-                    statusClass = "";
-                } else if (
-                    st.includes("FAILED") ||
-                    st.includes("RETURN") ||
-                    st.includes("GAGAL")
-                ) {
-                    statusClass = "failed";
-                }
-
-                let historyHTML = "";
-
-                if (Array.isArray(history) && history.length) {
-
-                    historyHTML = history.map(item => `
-                        <div class="history-item">
-
-                            <div class="history-desc">
-                                ${escapeHTML(
-                                    item.desc ||
-                                    item.description ||
-                                    item.status || "-"
-                                )}
-                            </div>
-
-                            <div class="history-date">
-                                ${escapeHTML(
-                                    item.date ||
-                                    item.datetime || ""
-                                )}
-                            </div>
-
-                            <div class="history-location">
-                                ${escapeHTML(
-                                    item.location ||
-                                    item.city || ""
-                                )}
-                            </div>
-
-                        </div>
-                    `).join("");
-
-                } else {
-
-                    historyHTML = `
-                        <div class="error">
-                            Riwayat perjalanan belum tersedia.
-                        </div>
-                    `;
-
-                }
-
-                const historyId = "history-" + i;
-
-                card.innerHTML = `
-
-                    <div class="card-header">
-                        <h2>Detail Paket</h2>
-                        <span class="card-number">#${i + 1}</span>
-                    </div>
-
-                    <div class="field">
-                        <div class="field-label">Nama Penerima</div>
-                        <div class="field-value">
-                            ${escapeHTML(penerima)}
-                        </div>
-                    </div>
-
-                    <div class="field">
-                        <div class="field-label">Alamat</div>
-                        <div class="field-value">
-                            ${escapeHTML(alamat)}
-                        </div>
-                    </div>
-
-                    <div class="field">
-                        <div class="field-label">No Resi</div>
-                        <div class="field-value">
-                            ${escapeHTML(nomor)}
-                        </div>
-                    </div>
-
-                    <div class="field">
-                        <div class="field-label">Seller</div>
-                        <div class="field-value">
-                            ${escapeHTML(seller)}
-                        </div>
-                    </div>
-
-                    <div class="field">
-                        <div class="field-label">Status</div>
-                        <span class="status ${statusClass}">
-                            ${escapeHTML(status)}
-                        </span>
-                    </div>
-
-                    <button class="history-btn"
-                        onclick="toggleHistory('${historyId}',this)">
-                        Lihat riwayat perjalanan
-                    </button>
-
-                    <div class="history" id="${historyId}">
-                        <div class="history-title">
-                            Riwayat Perjalanan
-                        </div>
-                        ${historyHTML}
-                    </div>
-
-                `;
-
-            } catch (error) {
-
-                card.innerHTML = `
-                    <div class="card-header">
-                        <h2>Detail Paket</h2>
-                        <span class="card-number">#${i + 1}</span>
-                    </div>
-
-                    <div class="field">
-                        <div class="field-label">No Resi</div>
-                        <div class="field-value">
-                            ${escapeHTML(nomor)}
-                        </div>
-                    </div>
-
-                    <div class="error">
-                        ${escapeHTML(error.message)}
-                    </div>
-                `;
-
-            }
-        }
-
-        progress.innerText =
-            "Selesai memproses " + daftar.length + " resi.";
-
-    } finally {
-
-        tombol.disabled = false;
-        tombol.innerText = "Lacak Paket";
-
-    }
+ return `
+ <div class="card">
+  <h3>DETAIL PAKET #${index}</h3>
+  ${buatBaris("Nama Penerima",aman(penerima))}
+  ${buatBaris("Alamat",aman(alamat))}
+  ${buatBaris("No Resi",aman(nomor))}
+  ${buatBaris("Seller",aman(seller))}
+  ${buatBaris("Status",`<span class="status">${aman(status)}</span>`)}
+  <button class="history" onclick="toggleHistory(this)">LIHAT RIWAYAT PERJALANAN</button>
+  <div class="history-list">${riwayat}</div>
+ </div>`;
 }
 
-
-function toggleHistory(id, button) {
-
-    const box = document.getElementById(id);
-
-    box.classList.toggle("show");
-
-    button.innerText = box.classList.contains("show")
-        ? "Tutup riwayat perjalanan"
-        : "Lihat riwayat perjalanan";
-
+function toggleHistory(button){
+ const list = button.nextElementSibling;
+ list.style.display = list.style.display === "block" ? "none" : "block";
 }
 
-</script>
+async function lacakSatu(resi,index){
+ const target = document.getElementById("result-"+index);
+ try{
+  const url = WORKER_URL.replace(/\/$/,"") +
+   "/api/track?resi="+encodeURIComponent(resi);
 
-</body>
+  const response = await fetch(url);
+  const json = await response.json();
+
+  if(!response.ok || json.success === false){
+   throw new Error(json.message || "Gagal melacak paket");
+  }
+
+  target.innerHTML = tampilkan(json,resi,index);
+ }catch(error){
+  target.innerHTML = `
+   <div class="card">
+    <h3>DETAIL PAKET #${index}</h3>
+    ${buatBaris("No Resi",aman(resi))}
+    <div class="error">Gagal: ${aman(error.message)}</div>
+   </div>`;
+ }
+}
+
+async function lacak(){
+ const input = document.getElementById("resi").value;
+ const resis = [...new Set(input.split(/[\n,;]+/)
+  .map(x=>x.trim()).filter(Boolean))];
+
+ const results = document.getElementById("results");
+ const button = document.getElementById("trackBtn");
+
+ if(!resis.length){
+  alert("Masukkan nomor resi terlebih dahulu.");
+  return;
+ }
+ if(resis.length > 55){
+  alert("Maksimal 55 nomor resi.");
+  return;
+ }
+ if(WORKER_URL.includes("GANTI_DENGAN")){
+  alert("URL Worker belum dipasang.");
+  return;
+ }
+
+ button.disabled = true;
+ button.textContent = "SEDANG MELACAK...";
+ results.innerHTML = resis.map((resi,i)=>
+  `<div id="result-${i+1}" class="card">
+   <h3>DETAIL PAKET #${i+1}</h3>
+   <div class="loading">Sedang melacak ${aman(resi)}...</div>
+  </div>`
+ ).join("");
+
+ for(let i=0;i<resis.length;i++){
+  await lacakSatu(resis[i],i+1);
+ }
+
+ button.disabled = false;
+ button.textContent = "LACAK PAKET";
+}
+</script></body>
 </html>
